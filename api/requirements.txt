@@ -1,0 +1,9 @@
+fastapi>=0.115,<0.120
+uvicorn[standard]>=0.32,<0.40
+sqlalchemy>=2.0.36,<2.1
+psycopg[binary]>=3.2,<3.3
+redis>=5.2,<6
+pyjwt>=2.9,<3
+bcrypt>=4.2,<5
+python-multipart>=0.0.17
+pydantic-settings>=2.6,<3

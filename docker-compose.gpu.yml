@@ -1,0 +1,27 @@
+# GPU override. Needs an NVIDIA GPU and the NVIDIA Container Toolkit
+# (on Windows: Docker Desktop with the WSL 2 backend and a current NVIDIA driver).
+#
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
+#
+# This builds the CUDA 11.7 variant of the worker image (about 5 GB larger).
+# NOTE: the GPU path has not been run by the authors of this repo; see README.
+
+services:
+  models:
+    build:
+      args:
+        ENGINE_DEVICE: cuda
+    image: voicely-worker:cuda
+
+  worker:
+    build:
+      args:
+        ENGINE_DEVICE: cuda
+    image: voicely-worker:cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
